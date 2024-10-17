@@ -51,6 +51,16 @@ module "gh_federated_credential-pr" {
   issuer_url                         = local.github_issuer_url
 }
 
+module "gh_federated_credential-main" {
+  source                             = "../modules/federated-identity-credential"
+  federated_identity_credential_name = "${var.github_organization_target}-${var.github_repository}-main"
+  rg_name                            = module.identity-resource-group.name
+  user_assigned_identity_id          = module.gh_usi.user_assinged_identity_id
+  subject                            = "repo:${var.github_organization_target}/${var.github_repository}:ref:refs/heads/main"
+  audience_name                      = local.default_audience_name
+  issuer_url                         = local.github_issuer_url
+}
+
 module "tfstate_role_assignment" {
   source       = "../modules/role-assignment"
   principal_id = module.gh_usi.user_assinged_identity_principal_id
