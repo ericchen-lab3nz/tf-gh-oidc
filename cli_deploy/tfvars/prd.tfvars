@@ -9,3 +9,4 @@ tags = {
   environment = "dev"
   owner = "eric"
 }
+github_repository = "tf-gh-oidc"
